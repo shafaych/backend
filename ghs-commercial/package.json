@@ -1,0 +1,26 @@
+{
+  "name": "ghs-commercial",
+  "version": "1.0.0",
+  "description": "GHS Custom Gear - From Concept to Game Day (Remotion)",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "build": "remotion render src/index.ts GHSCommercial out/ghs-custom-gear-commercial.mp4",
+    "typecheck": "tsc --noEmit",
+    "still": "remotion still src/index.ts GHSCommercial"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/bundler": "^4.0.536",
+    "@remotion/cli": "^4.0.536",
+    "@remotion/paths": "^4.0.536",
+    "@remotion/renderer": "^4.0.536",
+    "@types/react": "^18.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.536",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}
