@@ -1,0 +1,23 @@
+{
+  "name": "ghs-10-piece-challenge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GHS Custom Gear — The 10-Piece Challenge (Big Brands Start Small) — 40s Remotion commercial",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "audio": "python3 audio/build_audio.py",
+    "preview": "remotion render src/index.ts TenPieceChallenge out/preview-first-6s.mp4 --frames=0-179 --codec=h264",
+    "render": "remotion render src/index.ts TenPieceChallenge out/ghs-10-piece-challenge.mp4 --codec=h264 --audio-codec=aac --pixel-format=yuv420p",
+    "still": "remotion still src/index.ts TenPieceChallenge"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.537",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.537"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "^5.6.0"
+  }
+}
