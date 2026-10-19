@@ -6,7 +6,11 @@
     "start": "remotion studio src/index.ts",
     "build": "remotion render src/index.ts GHSCommercial out/ghs-custom-gear-commercial.mp4",
     "typecheck": "tsc --noEmit",
-    "still": "remotion still src/index.ts GHSCommercial"
+    "still": "remotion still src/index.ts GHSCommercial",
+    "audio:build": "cd audio && python3 build_music.py && python3 build_sfx.py && python3 master_stems.py",
+    "audio:vo": "cd audio && python3 build_vo.py && python3 master_stems.py",
+    "audio:scratch": "cd audio && python3 build_vo.py --scratch && python3 master_stems.py",
+    "build:preview-vo": "remotion render src/index.ts GHSCommercial-ScratchVO out/ghs-SCRATCH-VO-preview.mp4"
   },
   "keywords": [],
   "author": "",

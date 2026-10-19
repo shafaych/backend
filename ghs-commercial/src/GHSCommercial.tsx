@@ -8,6 +8,7 @@ import {Scene3Manufacturing} from './scenes/Scene3Manufacturing';
 import {Scene4Range} from './scenes/Scene4Range';
 import {Scene5B2B} from './scenes/Scene5B2B';
 import {Scene6Reveal} from './scenes/Scene6Reveal';
+import {Soundtrack, VoMode} from './audio/Soundtrack';
 
 type Entry = {C: React.FC; from: number; dur: number; wipe: WipeKind};
 
@@ -26,8 +27,9 @@ const TIMELINE: Entry[] = [
   {C: Scene6Reveal, ...SCENES.s6, wipe: 'down'},
 ];
 
-export const GHSCommercial: React.FC = () => (
+export const GHSCommercial: React.FC<{voMode?: VoMode}> = ({voMode = 'none'}) => (
   <AbsoluteFill style={{background: C.carbon}}>
+    <Soundtrack voMode={voMode} />
     {TIMELINE.map((s, i) => {
       const last = i === TIMELINE.length - 1;
       const Comp = s.C;

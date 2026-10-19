@@ -1,0 +1,13 @@
+{
+  "note": "Windows are in seconds on the 45.000 s master timeline. A line is time-fitted (never cut off) into [start, end].",
+  "lines": [
+    {"id": "01", "scene": 1, "start": 0.9,  "end": 4.7,  "text": "Your brand deserves more than ordinary."},
+    {"id": "02", "scene": 2, "start": 5.5,  "end": 11.8, "text": "Your vision. Your colors. Your identity. Custom sportswear, built around you."},
+    {"id": "03", "scene": 3, "start": 12.5, "end": 19.7, "text": "From precision cutting to sublimation and embroidery, every detail matters."},
+    {"id": "04", "scene": 4, "start": 20.5, "end": 27.7, "text": "Soccer. Basketball. Football. Training wear. One manufacturing partner for your brand."},
+    {"id": "05", "scene": 5, "start": 28.5, "end": 35.8, "text": "Start with just ten pieces. Scale with dedicated manufacturing and private-label production."},
+    {"id": "06", "scene": 6, "start": 37.6, "end": 40.5, "text": "GHS Custom Gear. Your vision. Our production."},
+    {"id": "07", "scene": 6, "start": 40.7, "end": 42.9, "text": "Let's build your next collection."},
+    {"id": "08", "scene": 6, "start": 43.1, "end": 44.9, "text": "Visit GHS Custom Gear dot com."}
+  ]
+}

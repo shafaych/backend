@@ -2,3 +2,12 @@ node_modules
 out/*
 !out/ghs-custom-gear-commercial.mp4
 !out/GHS_contact_sheet.png
+!out/deliver
+out/deliver/*
+!out/deliver/ghs-custom-gear-commercial-audio.mp4
+!out/deliver/GHS_contact_sheet_v2.png
+audio/*_raw.wav
+audio/tmp_*.wav
+audio/vo_scratch/
+audio/vo_scratch.wav
+__pycache__

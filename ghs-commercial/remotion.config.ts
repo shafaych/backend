@@ -13,3 +13,7 @@ if (local) {
   Config.setBrowserExecutable(local);
   Config.setChromeMode('chrome-for-testing');
 }
+
+// Parallel browser tabs intermittently produced corrupted frames (black blocks on large animated shapes) in headless Chromium.
+// A single tab renders deterministically (verified bit-identical across runs) and is about as fast here.
+Config.setConcurrency(1);

@@ -59,7 +59,7 @@ export const Scene4Range: React.FC = () => {
         </div>
       </div>
 
-      <div style={{position: 'absolute', inset: 0, perspective: 1800, perspectiveOrigin: '50% 40%', transform: `translateY(${camY}px)`}}>
+      <div style={{position: 'absolute', inset: 0, transform: `translateY(${camY}px)`}}>
         {KINDS.map((k, i) => {
           const st = 26 + i * 8;
           const inP = prog(frame, st, 26, ease.outExpo);
@@ -81,7 +81,7 @@ export const Scene4Range: React.FC = () => {
               key={k}
               style={{
                 position: 'absolute', left: p.x, top: p.y, width: CW, height: CH,
-                opacity: inP, transform: `translateY(${(1 - inP) * 90}px) rotateY(${tilt}deg)`, transformOrigin: 'left center',
+                opacity: inP, transform: `translateY(${(1 - inP) * 90}px) scaleX(${Math.cos((tilt * Math.PI) / 180).toFixed(4)}) skewY(${(tilt * 0.22).toFixed(3)}deg)`, transformOrigin: 'left center',
                 background: C.white, border: `2px solid ${tint(C.carbon, 0.85)}`, boxShadow: `14px 16px 0 ${tint(C.carbon, 0.08)}`,
                 clipPath: `inset(0 ${(1 - inP) * 60}% 0 0)`,
               }}
