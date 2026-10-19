@@ -57,12 +57,12 @@ export const Scene3Manufacturing: React.FC = () => {
   // ---- camera -------------------------------------------------------------
   const open = prog(f, 4, 30, ease.inOut);
   const zoom = prog(f, 130, 24, ease.inOut) - prog(f, 186, 24, ease.inOut);
-  const push = prog(f, 214, 40, ease.linear);
-  const s = lerp(lerp(STAGE.scale, 1.45, open), 3.6, zoom) + push * 0.1;
+  const push = prog(f, 206, 34, ease.outQuart);
+  const s = lerp(lerp(STAGE.scale, 1.45, open), 4.6, zoom) + push * 0.2;
   const fx = lerp(STAGE.jcx, 240, zoom);
   const fy = lerp(STAGE.jcy, 124, zoom);
   const sx = 540;
-  const sy = lerp(lerp(STAGE.cy, 1085, open), 1010, zoom);
+  const sy = lerp(lerp(STAGE.cy, 1085, open), 1010, zoom) - push * 30;
   const camT = `translate(${sx} ${sy}) scale(${s}) translate(${-fx} ${-fy})`;
 
   // ---- piece state -------------------------------------------------------------
@@ -71,7 +71,7 @@ export const Scene3Manufacturing: React.FC = () => {
   const printing = f > 84 && f < 118;
   const stitchP = (i: number) => prog(f, 108 + i * 4, 30, ease.inOut);
   const stitchFade = 1;
-  const embP = prog(f, 144, 40, ease.linear);
+  const embP = prog(f, 146, 36, ease.linear);
   const numberP = prog(f, 214, 20, ease.outQuart);
   const logoSolid = prog(f, 186, 12, ease.linear);
   const jerseyFade = 1 - prog(f, 4, 10, ease.linear);
@@ -143,7 +143,7 @@ export const Scene3Manufacturing: React.FC = () => {
             <g transform="translate(214 118) scale(0.1)" opacity={1 - logoSolid}>
               {GHS_ORDER.map((l, i) => (
                 <React.Fragment key={l}>
-                  <StitchPath d={GHS_LETTERS[l]} p={letterProg(i)} stroke={C.lime} width={26} on={3.2} off={2.4} cap="butt" />
+                  <StitchPath d={GHS_LETTERS[l]} p={letterProg(i)} stroke={C.lime} width={26} on={4.4} off={1.6} cap="butt" />
                   {letterProg(i) > 0 && letterProg(i) < 1 && (
                     <g>
                       <Head d={GHS_LETTERS[l]} p={letterProg(i)} r={30} fill={C.lime} ring={C.carbon} />
@@ -190,14 +190,14 @@ export const Scene3Manufacturing: React.FC = () => {
           <g transform={camT}>
             <JerseyDefs uid="s3" />
             <ellipse cx={200} cy={440} rx={210} ry={16} fill={tint(C.carbon, 0.16)} opacity={1 - jerseyFade} />
-            {/* S2 hand-off: the finished jersey, exactly as it ended */}
-            <g opacity={jerseyFade}>{jerseyFade > 0.001 && <Jersey uid="s3j" b={{...BUILT, design: 3}} />}</g>
             {f > 3 && (
               <g>
                 <path d={PATHS.outline} fill="none" stroke={C.graphite} strokeWidth={2.6} opacity={1 - prog(f, 56, 6, ease.linear)} />
                 {KEYS.map(renderPiece)}
               </g>
             )}
+            {/* S2 hand-off: the finished jersey, exactly as it ended */}
+            <g opacity={jerseyFade}>{jerseyFade > 0.001 && <Jersey uid="s3j" b={{...BUILT, design: 3}} />}</g>
           </g>
         </g>
         {/* mat corner ticks */}
@@ -208,8 +208,8 @@ export const Scene3Manufacturing: React.FC = () => {
         {/* annotations */}
         <Callout frame={f} start={22} end={70} ax={bodyAnchorCut[0]} ay={bodyAnchorCut[1]} lx={SAFE.left} ly={1458} index="01" label="PRECISION CUTTING" />
         <Callout frame={f} start={90} end={132} ax={bodyAnchorPrint[0]} ay={bodyAnchorPrint[1]} lx={W - SAFE.right - 330} ly={1458} index="02" label="SUBLIMATION" />
-        <Callout frame={f} start={114} end={150} ax={seamAnchor[0]} ay={seamAnchor[1]} lx={W - SAFE.right - 470} ly={1458} index="03" label="QUALITY CONSTRUCTION" />
-        <Callout frame={f} start={146} end={198} ax={chestAnchor[0]} ay={chestAnchor[1]} lx={SAFE.left} ly={1458} index="04" label="EMBROIDERY" />
+        <Callout frame={f} start={114} end={128} ax={seamAnchor[0]} ay={seamAnchor[1]} lx={W - SAFE.right - 470} ly={1458} index="03" label="QUALITY CONSTRUCTION" />
+        <Callout frame={f} start={152} end={198} ax={chestAnchor[0]} ay={chestAnchor[1]} lx={SAFE.left} ly={1458} index="04" label="EMBROIDERY" />
       </svg>
 
       {/* step ticker */}

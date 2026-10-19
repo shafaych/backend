@@ -69,7 +69,7 @@ export const Scene4Range: React.FC = () => {
           const t = cyc + 0;
           const seg = Math.min(2.999, t);
           const a = Math.floor(seg);
-          const local = ease.inOut(seg - a);
+          const local = ease.inOut(Math.min(1, Math.max(0, (seg - a - 0.72) / 0.28)));
           const ia = (baseIdx + a) % 4;
           const ib = (baseIdx + a + 1) % 4;
           const pal = mixPal(SETS[ia], SETS[ib], local);

@@ -1,3 +1,4 @@
 node_modules
 out/*
 !out/ghs-custom-gear-commercial.mp4
+!out/GHS_contact_sheet.png

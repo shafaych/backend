@@ -10,8 +10,8 @@ import {ease, fmtInt, lerp, prog} from '../utils/anim';
 type Fact = {value: (c: number) => string; unit?: string; label: string; slot: number; hero: number; text?: boolean};
 
 const FACTS: Fact[] = [
-  {value: (c) => `${Math.round(c * 10)}`, unit: 'PCS', label: 'LOW MOQ', slot: 150, hero: 380},
-  {value: (c) => `${Math.round(c * 100)}+`, label: 'MACHINES', slot: 150, hero: 380},
+  {value: (c) => `${Math.round(c * 10)}`, unit: 'PCS', label: 'LOW MOQ', slot: 150, hero: 320},
+  {value: (c) => `${Math.round(c * 100)}+`, label: 'MACHINES', slot: 150, hero: 320},
   {value: (c) => `${fmtInt(c * 3000)}–${fmtInt(c * 5000)}`, label: 'PIECES / MONTH', slot: 96, hero: 124},
   {value: () => 'PRIVATE LABEL', label: 'MANUFACTURING', slot: 82, hero: 98, text: true},
 ];
@@ -38,21 +38,22 @@ export const Scene5B2B: React.FC = () => {
       </div>
 
       {FACTS.map((fact, i) => {
-        const t = 8 + i * 52;
-        const a = prog(frame, t, 18, ease.outExpo) - prog(frame, t + 40, 16, ease.inOut);
-        const shown = frame >= t;
+        const t = 6 + i * 56;
+        const a = prog(frame, t, 18, ease.outExpo) - prog(frame, t + 34, 14, ease.inOut);
+        const shown = frame >= t + 4;
         const c = prog(frame, t + 8, 34, ease.outQuart);
         const slotY = Y0 + i * (RH + GAP);
         const y = lerp(slotY, Y0, a);
         const h = lerp(RH, ZONE_H, a);
-        const bg = interpolateColors(a, [0, 1], [C.white, C.carbon]);
-        const ink = interpolateColors(a, [0, 1], [C.carbon, C.porcelain]);
+        const ac = Math.min(1, Math.max(0, (a - 0.4) / 0.2));
+        const bg = interpolateColors(ac, [0, 1], [C.white, C.carbon]);
+        const ink = interpolateColors(ac, [0, 1], [C.carbon, C.porcelain]);
         const size = lerp(fact.slot, fact.hero, a);
         const heroTop = Y0 + ZONE_H / 2 - size * 0.62;
         const top = lerp(slotY + 30, heroTop, a);
         const labelTop = top + size * 1.02 + lerp(0, 8, a);
         const padX = lerp(36, 52, a);
-        const born = prog(frame, t - 6, 14, ease.outExpo);
+        const born = prog(frame, t - 1, 12, ease.outExpo);
         const ticks = Array.from({length: 26});
         return (
           <div key={i} style={{position: 'absolute', left: X, top: y, width: CWD, height: h, zIndex: i + (a > 0.01 ? 10 : 0)}}>
@@ -86,7 +87,7 @@ export const Scene5B2B: React.FC = () => {
                   <MaskText text={fact.value(1)} chars start={t + 8} stagger={1.1} dur={18} size={size} color={ink} tracking={-0.045} lineHeight={1} />
                 ) : (
                   <div style={{fontSize: size, lineHeight: 1, letterSpacing: '-0.045em', fontVariantNumeric: 'tabular-nums', display: 'flex', alignItems: 'baseline', gap: size * 0.12}}>
-                    <span style={{color: a > 0.5 ? C.lime : C.carbon}}>{fact.value(c)}</span>
+                    <span style={{color: ac > 0.5 ? C.lime : C.carbon}}>{fact.value(c)}</span>
                     {fact.unit && <span style={{fontSize: size * 0.36, letterSpacing: '0.02em', color: ink}}>{fact.unit}</span>}
                   </div>
                 )}
