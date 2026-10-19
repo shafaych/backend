@@ -5,21 +5,28 @@ import { T, FPS } from "../timeline";
 import { Flash, MaskLine, Tag, TechGrid } from "../components/Fx";
 
 const SLATS = 14;
-const Wordmark: React.FC<{ t: number; size: number }> = ({ t, size }) => (
-  <div style={{ position: "relative", width: 1080, height: size * 0.95 }}>
-    {Array.from({ length: SLATS }, (_, i) => {
-      const k = prog(t, 34.42 + Math.abs(i - SLATS / 2) * 0.028, 0.34, easeOut);
-      const w = 1080 / SLATS;
-      return (
-        <div key={i} style={{ position: "absolute", left: 0, top: 0, width: 1080, height: "100%", clipPath: `inset(0 ${1080 - (i + 1) * w - 0.5}px 0 ${i * w - 0.5}px)`, opacity: Math.min(1, k * 4) }}>
-          <div style={{ transform: `translateY(${(i % 2 ? 1 : -1) * (1 - k) * 420}px)`, fontFamily: FONT, fontWeight: 900, fontSize: size, lineHeight: 0.95, letterSpacing: "-0.055em", color: C.white, textAlign: "center", width: 1080 }}>
-            <span style={{ display: "inline-block", transform: "scaleX(.92)" }}>GHS</span>
+const Wordmark: React.FC<{ t: number; size: number }> = ({ t, size }) => {
+  const style: React.CSSProperties = { fontFamily: FONT, fontWeight: 900, fontSize: size, lineHeight: 0.95, letterSpacing: "-0.055em", color: C.white, textAlign: "center", width: 1080 };
+  const settled = t >= 34.42 + (SLATS / 2) * 0.028 + 0.34 + 0.05;
+  // Once every slat has landed, swap to a single solid text node: slat clip edges fall on fractional
+  // pixels and left faint hairline seams in the settled wordmark.
+  if (settled) return <div style={{ position: "relative", width: 1080, height: size * 0.95 }}><div style={style}><span style={{ display: "inline-block", transform: "scaleX(.92)" }}>GHS</span></div></div>;
+  return (
+    <div style={{ position: "relative", width: 1080, height: size * 0.95 }}>
+      {Array.from({ length: SLATS }, (_, i) => {
+        const k = prog(t, 34.42 + Math.abs(i - SLATS / 2) * 0.028, 0.34, easeOut);
+        const w = 1080 / SLATS;
+        return (
+          <div key={i} style={{ position: "absolute", left: 0, top: 0, width: 1080, height: "100%", clipPath: `inset(0 ${Math.max(0, 1080 - (i + 1) * w - 1.5)}px 0 ${Math.max(0, i * w - 1.5)}px)`, opacity: Math.min(1, k * 4) }}>
+            <div style={{ ...style, transform: `translateY(${(i % 2 ? 1 : -1) * (1 - k) * 420}px)` }}>
+              <span style={{ display: "inline-block", transform: "scaleX(.92)" }}>GHS</span>
+            </div>
           </div>
-        </div>
-      );
-    })}
-  </div>
-);
+        );
+      })}
+    </div>
+  );
+};
 
 export const Scene6: React.FC = () => {
   const frame = useCurrentFrame();
@@ -66,27 +73,22 @@ export const Scene6: React.FC = () => {
       <MaskLine t={t} at={T.headline6} size={172} y={580} x={54} width={1000} squeeze={0.84} dur={0.55}>YOUR BRAND</MaskLine>
       <MaskLine t={t} at={T.headline6 + 0.12} size={172} y={750} x={54} width={1000} squeeze={0.84} color={C.lime} dur={0.55}>STARTS HERE.</MaskLine>
 
-      {/* support line + ten tiles */}
-      <div style={{ position: "absolute", left: 60, top: 1010, background: C.lime, color: C.carbon, fontFamily: FONT, fontWeight: 900, fontSize: 56, letterSpacing: "-0.01em", padding: "14px 30px", transform: `scaleX(${prog(t, T.support6, 0.45)})`, transformOrigin: "0 50%", whiteSpace: "nowrap" }}>START WITH 10 PIECES.</div>
+      {/* CTA + ten tiles */}
+      <div style={{ position: "absolute", left: 60, top: 985, background: C.lime, color: C.carbon, fontFamily: FONT, fontWeight: 900, fontSize: 60, lineHeight: 1.04, letterSpacing: "-0.015em", padding: "16px 32px 18px", transform: `scaleX(${prog(t, T.support6, 0.45)})`, transformOrigin: "0 50%", whiteSpace: "nowrap" }}>START YOUR CUSTOM ORDER<br />— MOQ 10 PIECES</div>
       <svg width="1080" height="1920" style={{ position: "absolute", inset: 0 }}>
         {Array.from({ length: 10 }, (_, i) => {
           const kk = prog(t, T.support6 + 0.1 + i * 0.045, 0.3, easeBack);
-          return <rect key={i} x={60 + i * 98} y={1160} width="80" height={88 * kk} fill="none" stroke={C.lime} strokeWidth="3" opacity={kk > 0 ? 1 : 0} />;
-        })}
-        {Array.from({ length: 10 }, (_, i) => {
-          const kk = prog(t, T.support6 + 0.1 + i * 0.045, 0.3, easeBack);
-          return <rect key={`f${i}`} x={60 + i * 98} y={1160 + 88 - 88 * kk} width="80" height={88 * kk} fill={C.lime} />;
+          return <rect key={i} x={60 + i * 98} y={1196 + 64 - 64 * kk} width="80" height={64 * kk} fill={C.lime} />;
         })}
       </svg>
 
-      {/* URL */}
-      <div style={{ position: "absolute", left: 0, top: 1420, width: 1080, textAlign: "center", opacity: prog(t, T.url, 0.2) }}>
-        <div style={{ fontFamily: FONT, fontWeight: 900, fontSize: 98, letterSpacing: "-0.04em", color: C.white, display: "inline-block", transform: "scaleX(.9)" }}>
-          {"ghscustomgear.com".split("").map((ch, i) => <span key={i} style={{ opacity: prog(t, T.url + i * 0.025, 0.1) , color: i < 3 ? C.lime : C.white }}>{ch}</span>)}
+      {/* URL — solid lime slab, the largest element on the end card after the headline */}
+      <div style={{ position: "absolute", left: 60, top: 1340, width: 960, height: 176, background: C.lime, display: "flex", alignItems: "center", justifyContent: "center", transform: `scaleY(${prog(t, T.url, 0.35, easeOut)})`, transformOrigin: "50% 100%" }}>
+        <div style={{ fontFamily: FONT, fontWeight: 900, fontSize: 104, letterSpacing: "-0.045em", color: C.carbon, transform: "scaleX(.88)", whiteSpace: "nowrap" }}>
+          {"ghscustomgear.com".split("").map((ch, i) => <span key={i} style={{ opacity: prog(t, T.url + 0.1 + i * 0.02, 0.1) }}>{ch}</span>)}
         </div>
-        <div style={{ height: 6, background: C.lime, width: 880 * prog(t, T.url + 0.1, 0.6, easeInOut), margin: "14px auto 0" }} />
       </div>
-      <Tag x={0} y={1810} align="center" size={17} opacity={0.5 * prog(t, T.url, 0.5)} spacing={2}>Hypothetical scenarios shown for illustration only.</Tag>
+      <Tag x={0} y={1768} align="center" size={25} opacity={0.75 * prog(t, T.url, 0.5)} spacing={1}>Hypothetical scenarios shown for illustration only.</Tag>
       <Flash t={t} at={T.wordmark} peak={0.5} decay={9} />
       <Flash t={t} at={T.headline6} peak={0.5} decay={10} color={C.lime} />
     </AbsoluteFill>

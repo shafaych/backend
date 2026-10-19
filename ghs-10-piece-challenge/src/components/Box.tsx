@@ -23,11 +23,13 @@ export const Box: React.FC<{ open: number; tape?: number; children?: React.React
       <polygon points="160,-20 240,-60 240,220 160,260" fill="#0d0e0d" />
       <polygon points="-200,-20 160,-20 160,6 -200,6" fill="#000" opacity=".25" />
       {/* printed branding */}
-      <g transform="translate(-20 130)">
-        <Crest size={92} fill={C.lime} ink={C.carbon} />
-        <text x="0" y="86" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="30" letterSpacing="9" fill={C.white}>KESTREL</text>
-        <text x="0" y="112" textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize="12" letterSpacing="5" fill={C.lime}>ATHLETICS · EST. 2025</text>
+      <g transform="translate(-20 84)">
+        <Crest size={62} fill={C.lime} ink={C.carbon} />
+        <text x="0" y="62" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="20" letterSpacing="7" fill={C.white} opacity=".8">KESTREL</text>
+        <text x="0" y="82" textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize="10" letterSpacing="3" fill={C.white} opacity=".5">ILLUSTRATIVE BRAND</text>
       </g>
+      <rect x="-200" y="214" width="360" height="46" fill={C.lime} />
+      <text x="-20" y="244" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="19" letterSpacing="3.5" fill={C.carbon}>MADE BY GHS CUSTOM GEAR</text>
       {o <= 0.35 && lidEl}
       {/* lid-front */}
       {o < 0.5 && (

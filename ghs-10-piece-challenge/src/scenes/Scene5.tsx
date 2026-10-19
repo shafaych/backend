@@ -41,7 +41,7 @@ export const Scene5: React.FC = () => {
   }
   if (t >= kf[kf.length - 1].t) c = kf[kf.length - 1];
   const gx = (u: number) => GX + u * GS, gy = (v: number) => GY + v * GS;
-  const cam = `translate(540px, 940px) scale(${c.z}) rotateY(${Math.sin(t * 0.5) * 5}deg) translate(${-gx(c.fx)}px, ${-gy(c.fy)}px)`;
+  const cam = `translate(540px, 915px) scale(${c.z}) rotateY(${Math.sin(t * 0.5) * 5}deg) translate(${-gx(c.fx)}px, ${-gy(c.fy)}px)`;
   const d = bodyPath(0);
   const march = -frame * 1.2;
 
@@ -57,10 +57,23 @@ export const Scene5: React.FC = () => {
       </div>
 
       {/* camera group with 3D perspective */}
-      <AbsoluteFill style={{ perspective: 1800, perspectiveOrigin: "50% 50%", clipPath: "inset(440px 0 480px 0)" }}>
+      <AbsoluteFill style={{ perspective: 1800, perspectiveOrigin: "50% 50%", clipPath: "inset(440px 0 530px 0)" }}>
         <div style={{ position: "absolute", inset: 0, transform: cam, transformOrigin: "0 0" }}>
           <svg width="1080" height="1920" style={{ position: "absolute", inset: 0, overflow: "visible" }}>
             <g transform={`translate(${GX} ${GY}) scale(${GS})`}>
+              {/* registration ring + scan sweep: gives the opening seconds of the drawing purposeful motion */}
+              <g transform="translate(200 235)" opacity={0.4 * prog(t, 27.2, 0.6)}>
+                <circle r="285" fill="none" stroke={C.lime} strokeWidth="1" strokeDasharray="3 9" transform={`rotate(${t * 14})`} />
+                <circle r="250" fill="none" stroke={C.white} strokeWidth="0.6" strokeOpacity=".5" />
+                <path d="M-300 0 H-262 M262 0 H300 M0 -300 V-262 M0 262 V300" stroke={C.lime} strokeWidth="1.4" />
+              </g>
+              {t > 27.4 && t < 29.6 && (
+                <g opacity={Math.sin(prog(t, 27.4, 2.2, (x) => x) * Math.PI)}>
+                  <rect x="-30" y={-20 + prog(t, 27.4, 2.2, easeInOut) * 500} width="460" height="3" fill={C.lime} />
+                  <rect x="-30" y={-20 + prog(t, 27.4, 2.2, easeInOut) * 500 - 36} width="460" height="36" fill="url(#scanG)" />
+                </g>
+              )}
+              <defs><linearGradient id="scanG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor={C.lime} stopOpacity="0" /><stop offset="1" stopColor={C.lime} stopOpacity=".28" /></linearGradient></defs>
               <path d={d} fill={`rgba(255,255,255,${0.05 * fillK})`} />
               <path d={d} fill="none" stroke={C.white} strokeWidth="1.6" pathLength={1} strokeDasharray="1" strokeDashoffset={1 - draw} strokeLinejoin="round" />
               <g stroke={C.white} strokeOpacity=".5" strokeWidth="1.1" fill="none">
@@ -87,14 +100,14 @@ export const Scene5: React.FC = () => {
                 <g opacity={k(1)}>
                   <text x="200" y="312" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="118" letterSpacing="-4" fill="none" stroke={C.white} strokeWidth="2">10</text>
                   <g transform="translate(262 118)"><Crest size={38} fill="none" ink={C.lime} /><polygon points="0,-20 17.3,-10 17.3,10 0,20 -17.3,10 -17.3,-10" fill="none" stroke={C.lime} strokeWidth="2" /></g>
-                  <text x="200" y="176" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="19" letterSpacing="5" fill={C.white}>KESTREL</text>
+                  <text x="200" y="176" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="15" letterSpacing="4" fill={C.white} opacity=".8">YOUR BRAND</text>
                 </g>
               )}
               {/* 3 — private label tag */}
               {idx >= 2 && (
                 <g transform="translate(200 41)" opacity={k(2)}>
                   <rect x="-31" y="-11" width="62" height="23" fill={C.porcelain} />
-                  <text y="-0.5" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="8.4" letterSpacing="1.4" fill="#171917">KESTREL</text>
+                  <text y="-0.5" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="7.2" letterSpacing="1.2" fill="#171917">YOUR BRAND</text>
                   <text y="8" textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize="3.6" letterSpacing="0.6" fill="#171917">PRIVATE LABEL · M</text>
                   <circle r={22 + 12 * ((t * 1.3) % 1)} fill="none" stroke={C.lime} strokeWidth="1.2" opacity={1 - ((t * 1.3) % 1)} />
                 </g>
@@ -112,19 +125,19 @@ export const Scene5: React.FC = () => {
       </AbsoluteFill>
 
       {/* capability list */}
-      <div style={{ position: "absolute", left: 60, right: 60, top: 1450 }}>
+      <div style={{ position: "absolute", left: 60, right: 60, top: 1400 }}>
         {TAGS.map((g, i) => {
-          const kk = prog(t, g.at, 0.5, easeOut);
+          const kk = Math.max(0.3 * prog(t, 27.6 + i * 0.1, 0.5, easeOut), prog(t, g.at, 0.5, easeOut));
           const on = idx === i;
           return (
             <div key={g.text} style={{ height: 90, borderTop: `2px solid rgba(255,255,255,${0.18 * kk})`, display: "flex", alignItems: "center", gap: 26, opacity: kk, transform: `translateX(${(1 - kk) * -60}px)` }}>
               <span style={{ fontFamily: MONO, fontWeight: 700, fontSize: 26, color: C.lime, width: 54 }}>0{i + 1}</span>
-              <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 56, letterSpacing: "-0.03em", color: on ? C.lime : C.white, opacity: on ? 1 : 0.55, transform: "scaleX(.9)", transformOrigin: "0 50%", whiteSpace: "nowrap" }}>{g.text}</span>
+              <span style={{ fontFamily: FONT, fontWeight: 900, fontSize: 56, letterSpacing: "-0.03em", color: on ? C.lime : C.white, opacity: t < g.at ? 0.5 : on ? 1 : 0.55, transform: "scaleX(.9)", transformOrigin: "0 50%", whiteSpace: "nowrap" }}>{g.text}</span>
             </div>
           );
         })}
       </div>
-      <Tag x={60} y={1850} size={17} opacity={0.5} spacing={2}>Illustrative technical drawing.</Tag>
+      <Tag x={60} y={1780} size={24} opacity={0.7} spacing={1}>Illustrative technical drawing.</Tag>
       <Flash t={t} at={27.0} peak={0.3} color={C.lime} decay={10} />
     </AbsoluteFill>
   );

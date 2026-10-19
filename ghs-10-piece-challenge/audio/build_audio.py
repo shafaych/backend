@@ -181,8 +181,14 @@ vo *= 0.95 / np.max(np.abs(vo))
 # duck mask from VO activity
 act = lp(np.abs(vo), 8, 1)
 act = (act > 0.012).astype(float)
-duck = signal.sosfilt(signal.butter(1, 6 / (SR / 2), "low", output="sos"), act)
-duck = np.clip(duck * 1.4, 0, 1)
+# bridge short gaps between words so the bed does not pump, then asymmetric attack (60 ms) / release (450 ms)
+act = np.convolve(act, np.ones(int(0.35 * SR)) / int(0.35 * SR), "same") > 0.02
+act = act.astype(float)
+a_att, a_rel = np.exp(-1 / (0.06 * SR)), np.exp(-1 / (0.45 * SR))
+duck = np.zeros(N); y = 0.0
+for i in range(N):
+    x = act[i]; c = a_att if x > y else a_rel
+    y = c * y + (1 - c) * x; duck[i] = y
 
 # ---------------------------------------------------------------- cue sheet (seconds) – mirrored by src/timeline.ts
 CUES = {
@@ -337,9 +343,9 @@ ramp(mm, 33.7, 33.95, 1, 0)
 ramp(mm, 38.4, 40.0, 1, 0.0)
 music_st = music_st * mm[:, None]
 # also silence SFX tails (riser) not needed; keep dramatic cuts clean via mask on sfx for black beats
-duck_m = 1 - 0.38 * duck   # music ducks ~4 dB … deeper below
+duck_m = 1 - 0.80 * duck   # music dips ~14 dB under narration
 music_st = music_st * duck_m[:, None] * 0.55
-sfx_st = sfx * (1 - 0.22 * duck)[:, None] * 0.8
+sfx_st = sfx * (1 - 0.45 * duck)[:, None] * 0.8
 vo_st = np.stack([vo, vo], 1)
 
 def norm_peak(x, p): return x * (p / (np.max(np.abs(x)) + 1e-9))

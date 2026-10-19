@@ -132,7 +132,7 @@ export const Jersey: React.FC<JerseyProps> = (p) => {
         <path d="M100 420 Q200 436 300 420 L300 436 Q200 452 100 436 Z" fill={trim} opacity={blank ? 0.5 : 1} />
         {/* chest graphics */}
         {!blank && wordmark && crestProgress > 0.01 && (
-          <text x="200" y="176" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="19" letterSpacing="5" fill={trim} opacity={crestProgress}>{wordmark}</text>
+          <text x="200" y="176" textAnchor="middle" fontFamily={FONT} fontWeight={900} fontSize="13" letterSpacing="4" fill={trim} opacity={crestProgress * 0.75}>{wordmark}</text>
         )}
         {number && (
           <g transform={`translate(200 ${312 - (1 - numberProgress) * 0}) scale(${1 + (1 - numberProgress) * 0.5})`} opacity={numberProgress} style={{ transformOrigin: "200px 312px" }}>
@@ -143,7 +143,7 @@ export const Jersey: React.FC<JerseyProps> = (p) => {
           <text x={48 - sx} y={150 + sy} fontFamily={FONT} fontWeight={900} fontSize="30" fill={trim} opacity={sleeveNumberProgress} transform={`rotate(-54 ${48 - sx} ${150 + sy})`} textAnchor="middle">{number ?? "10"}</text>
         )}
         <g transform="translate(262 118)">
-          <Crest size={38} fill={trim} ink={base} progress={crestProgress} />
+          <Crest size={32} fill={trim} ink={base} progress={crestProgress} />
           {stitchProgress > 0 && (
             <polygon points="0,-24 20.8,-12 20.8,12 0,24 -20.8,12 -20.8,-12" fill="none" stroke={C.lime} strokeWidth="2.2" strokeDasharray="5 3.5" pathLength={1}
               style={{ strokeDasharray: `${stitchProgress * 140} 400` }} />

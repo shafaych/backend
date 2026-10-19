@@ -21,10 +21,10 @@ const Tile: React.FC<{ x: number; y: number; s: number; fill: string; ink: strin
 export const Scene4: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / FPS;
-  const cur = [...COUNTS].reverse().find((c) => t >= c.at) ?? { n: 0, at: 99 };
+  const cur = [...COUNTS].reverse().find((c) => t >= c.at) ?? { n: 10, at: 20.0 };
   const prev = COUNTS[Math.max(0, COUNTS.indexOf(cur) - 1)];
   const roll = prog(t, cur.at, 0.5, easeOut);
-  const shown = cur.n === 0 ? 0 : Math.round(mix(cur === COUNTS[0] ? 0 : prev.n, cur.n, roll));
+  const shown = t < COUNTS[0].at ? 10 : Math.round(mix(cur === COUNTS[0] ? 10 : prev.n, cur.n, roll));
   const sh = shake(t, T.thinkBig, 40, 7);
   const sh2 = shake(t, T.startSmall, 22, 8);
 
@@ -37,11 +37,12 @@ export const Scene4: React.FC = () => {
     return { lit, k: prog(t, born, 0.35, easeBack), stage };
   };
   const colors = [C.lime, C.white, "#9AA39A", "#5C655C"];
-  const gridFade = 1 - 0.78 * prog(t, T.startSmall, 0.4);
+  const gridFade = 1 - 0.3 * prog(t, T.startSmall, 0.4);
+  const pulse = (col: number, row: number) => (t >= T.startSmall && t < T.thinkBig ? 0.12 * Math.sin((t - T.startSmall) * 9 - (col + row) * 0.7) : 0);
   const gridBurst = prog(t, T.thinkBig, 0.8, easeOut);
 
   // order-flow diagram
-  const nodes = [{ x: 120, l: "DESIGN" }, { x: 330, l: "SAMPLE" }, { x: 540, l: "PRODUCE" }, { x: 750, l: "PACK" }, { x: 960, l: "SHIP" }];
+  const nodes = [{ x: 120, l: "DESIGN" }, { x: 330, l: "SAMPLE" }, { x: 540, l: "GHS MAKES" }, { x: 750, l: "PACK" }, { x: 960, l: "SHIP" }];
   const flow = prog(t, 20.3, 0.8);
   const boxes = Math.min(5, Math.floor(shown / 10) + (shown > 0 ? 1 : 0));
 
@@ -53,7 +54,7 @@ export const Scene4: React.FC = () => {
       <Tag x={1020} y={90} align="right" opacity={0.5 * prog(t, 20.3, 0.4)}>Illustrative scenario</Tag>
 
       {/* counter */}
-      <div style={{ position: "absolute", left: 50, top: 150, opacity: 1 - big * 0.85, transform: `translateY(${-big * 60}px)` }}>
+      <div style={{ position: "absolute", left: 50, top: 150, opacity: 1 - big, transform: `translateY(${-big * 60}px)` }}>
         <div style={{ fontFamily: FONT, fontWeight: 900, fontSize: 380, lineHeight: 0.9, letterSpacing: "-0.06em", color: C.lime, transform: "scaleX(0.9)", transformOrigin: "0 50%", textShadow: `0 0 70px rgba(200,243,107,${0.25 + 0.3 * Math.exp(-(t - cur.at) * 4)})` }}>{shown}</div>
         <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 30, letterSpacing: 8, color: C.white, marginTop: 6 }}>PIECES · ILLUSTRATIVE ORDER SIZE</div>
       </div>
@@ -67,7 +68,7 @@ export const Scene4: React.FC = () => {
             const ang = rand(i + 1) * Math.PI * 2;
             const bx = Math.cos(ang) * gridBurst * (500 + rand(i) * 700), by = Math.sin(ang) * gridBurst * (700 + rand(i + 9) * 800);
             const unlit = !c.lit;
-            return <Tile key={i} x={col * 90 + bx} y={row * 90 + by} s={0.98} fill={c.lit ? colors[c.stage] : "#2a2e29"} ink={c.lit ? C.carbon : "#3a3f39"} k={unlit ? Math.max(0.0, prog(t, 20.3 + i * 0.004, 0.4)) : c.k} />;
+            return <Tile key={i} x={col * 90 + bx} y={row * 90 + by} s={0.98 + pulse(col, row)} fill={c.lit ? colors[c.stage] : "#363c35"} ink={c.lit ? C.carbon : "#4a514a"} k={unlit ? Math.max(0.0, prog(t, 20.05 + (col + (9 - row)) * 0.025, 0.4)) : c.k} />;
           })}
         </g>
         {/* order flow */}
@@ -79,7 +80,7 @@ export const Scene4: React.FC = () => {
             <g key={n.l} transform={`translate(${n.x} 0)`}>
               <circle r="20" fill={C.carbon} stroke={C.lime} strokeWidth="3" />
               <circle r="8" fill={C.lime} />
-              <text y="-44" textAnchor="middle" fontFamily={MONO} fontWeight={700} fontSize="20" letterSpacing="3" fill={C.white}>{n.l}</text>
+              <text y="-44" textAnchor="middle" fontFamily={MONO} fontWeight={700} fontSize="26" letterSpacing="1" fill={i === 2 ? C.lime : C.white}>{n.l}</text>
             </g>
           ))}
           {/* branded boxes multiply on the PACK node */}
@@ -94,17 +95,17 @@ export const Scene4: React.FC = () => {
 
       {/* START SMALL / THINK BIG */}
       <AbsoluteFill style={{ opacity: t >= T.startSmall ? 1 : 0 }}>
-        <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(23,25,23,${0.85 * big}) 0%, rgba(23,25,23,${0.85 * big}) 100%)` }} />
-        <MaskLine t={t} at={T.startSmall} size={250} y={560} x={56} width={1000} squeeze={0.82} dur={0.5}>START</MaskLine>
-        <MaskLine t={t} at={T.startSmall + 0.08} size={250} y={790} x={56} width={1000} squeeze={0.82} dur={0.5}>SMALL.</MaskLine>
+        <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(23,25,23,${0.5 * big}) 0%, rgba(23,25,23,${0.5 * big}) 100%)` }} />
+        <MaskLine t={t} at={T.startSmall} size={215} y={140} x={56} width={1000} squeeze={0.82} dur={0.5}>START</MaskLine>
+        <MaskLine t={t} at={T.startSmall + 0.08} size={215} y={330} x={56} width={1000} squeeze={0.82} dur={0.5}>SMALL.</MaskLine>
         {t >= T.thinkBig && (
           <div style={{ position: "absolute", left: 0, top: 1060, width: 1080, transform: `scale(${mix(1.8, 1, prog(t, T.thinkBig, 0.35))})`, transformOrigin: "50% 30%" }}>
             <div style={{ fontFamily: FONT, fontWeight: 900, fontSize: 330, lineHeight: 0.88, letterSpacing: "-0.06em", color: C.lime, transform: "scaleX(0.84)", textAlign: "center", whiteSpace: "nowrap", textShadow: "0 0 80px rgba(200,243,107,.4)" }}>THINK<br />BIG.</div>
           </div>
         )}
       </AbsoluteFill>
-      <Tag x={60} y={1760} size={18} opacity={0.65 * prog(t, 20.4, 0.5)} spacing={2}>Illustrative scenario only — not a customer case study.</Tag>
-      <Tag x={60} y={1790} size={18} opacity={0.65 * prog(t, 20.4, 0.5)} spacing={2}>Lead times and production capacity vary by order.</Tag>
+      <Tag x={60} y={1736} size={24} opacity={0.85 * prog(t, 20.4, 0.5)} spacing={1}>Illustrative scenario only — not a customer case study.</Tag>
+      <Tag x={60} y={1772} size={24} opacity={0.85 * prog(t, 20.4, 0.5)} spacing={1}>Lead times and production capacity vary by order.</Tag>
 
       <Flash t={t} at={T.startSmall} peak={0.3} decay={12} />
       <Flash t={t} at={T.thinkBig} peak={0.75} decay={9} color={C.lime} />

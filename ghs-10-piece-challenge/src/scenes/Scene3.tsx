@@ -117,7 +117,7 @@ export const Scene3: React.FC = () => {
       <div style={{ position: "absolute", left: -20, top: 640, fontFamily: FONT, fontWeight: 900, fontSize: 560, letterSpacing: "-0.06em", color: "transparent", WebkitTextStroke: `2px rgba(23,25,23,.14)`, transform: `translateX(${-(t - 13) * 36}px) scaleX(.86)`, transformOrigin: "0 0", whiteSpace: "nowrap" }}>{word.replace(".", "")}</div>
 
       <Tag x={60} y={90} color={C.carbon} opacity={prog(t, 13.3, 0.4)}>[ 03 ] Brand studio</Tag>
-      <Tag x={1020} y={90} align="right" color={C.carbon} opacity={0.5 * prog(t, 13.3, 0.4)}>Concept → Private label</Tag>
+      <Tag x={1020} y={90} align="right" color={C.carbon} opacity={0.9 * prog(t, 13.3, 0.4)}>Made by GHS Custom Gear</Tag>
 
       {/* headline: YOUR + swapping word */}
       <MaskLine t={t} at={13.2} size={190} y={150} x={56} width={1000} squeeze={0.84} color={C.carbon} dur={0.6}>YOUR</MaskLine>
@@ -191,7 +191,7 @@ export const Scene3: React.FC = () => {
       </svg>
 
       {/* live spec caption */}
-      <div style={{ position: "absolute", left: 60, bottom: 76, fontFamily: MONO, fontWeight: 700, fontSize: 24, letterSpacing: 3, color: C.carbon, opacity: prog(t, 13.4, 0.4) * (1 - prog(t, 19.5, 0.4)), whiteSpace: "nowrap" }}>
+      <div style={{ position: "absolute", left: 60, bottom: 76, fontFamily: MONO, fontWeight: 700, fontSize: 28, letterSpacing: 1, color: C.carbon, opacity: prog(t, 13.4, 0.4) * (1 - prog(t, 19.5, 0.4)), whiteSpace: "nowrap" }}>
         <span style={{ background: C.carbon, color: C.lime, padding: "6px 10px", marginRight: 14 }}>{cap[1].split(" — ")[0]}</span>{cap[1].includes(" — ") ? cap[1].split(" — ")[1] : ""}
       </div>
       <Flash t={t} at={13.3} peak={0.0} />

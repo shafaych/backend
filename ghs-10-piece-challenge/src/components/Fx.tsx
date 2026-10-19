@@ -30,7 +30,7 @@ export const TechGrid: React.FC<{ color?: string; opacity?: number; step?: numbe
 );
 
 /** Small mono caption (section tags, disclaimers). */
-export const Tag: React.FC<{ children: React.ReactNode; x: number; y: number; color?: string; size?: number; opacity?: number; align?: "left" | "right" | "center"; spacing?: number }> = ({ children, x, y, color = "#fff", size = 22, opacity = 1, align = "left", spacing = 3 }) => (
+export const Tag: React.FC<{ children: React.ReactNode; x: number; y: number; color?: string; size?: number; opacity?: number; align?: "left" | "right" | "center"; spacing?: number }> = ({ children, x, y, color = "#fff", size = 28, opacity = 1, align = "left", spacing = 2 }) => (
   <div style={{ position: "absolute", left: align === "left" ? x : undefined, right: align === "right" ? 1080 - x : undefined, top: y, width: align === "center" ? 1080 : undefined, textAlign: align, fontFamily: MONO, fontSize: size, letterSpacing: spacing, color, opacity, fontWeight: 700, textTransform: "uppercase", whiteSpace: "nowrap" }}>{children}</div>
 );
 

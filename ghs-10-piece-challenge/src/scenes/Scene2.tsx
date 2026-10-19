@@ -49,7 +49,7 @@ export const Scene2: React.FC = () => {
       <TechGrid opacity={0.05} offsetY={-frame} />
       <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 62%, rgba(200,243,107,${0.10 + 0.05 * Math.sin(t * 2)}) 0%, rgba(23,25,23,0) 60%)` }} />
       <Tag x={60} y={90} color={C.lime} opacity={prog(t, 6.5, 0.4)}>[ 02 ] First collection</Tag>
-      <Tag x={1020} y={90} align="right" opacity={0.5 * prog(t, 6.5, 0.4)}>10 pcs · 10 colourways</Tag>
+      <Tag x={1020} y={90} align="right" color={C.lime} opacity={0.95 * prog(t, 6.5, 0.4)}>Made by GHS Custom Gear</Tag>
 
       {/* 10 breaking apart */}
       {t < T.burst + 0.8 && <BigTen scale={mix(1, 1.5, shat)} opacity={tenOpacity} slice={shat} blur={shat * 14} glow={0.8} qOpacity={1 - shat} />}
@@ -91,11 +91,11 @@ export const Scene2: React.FC = () => {
       {/* spec strip */}
       <div style={{ position: "absolute", left: 60, right: 60, top: 1672, height: 2, background: C.lime, opacity: 0.55, transform: `scaleX(${prog(t, 10.2, 0.8)})`, transformOrigin: "0 50%" }} />
       {["RIB COLLAR", "FLATLOCK SEAMS", "PANEL BLOCKING"].map((txt, i) => (
-        <div key={txt} style={{ position: "absolute", left: 60 + i * 335, top: 1696, fontFamily: MONO, fontWeight: 700, fontSize: 21, letterSpacing: 3, color: C.white, opacity: prog(t, 10.5 + i * 0.5, 0.4), transform: `translateY(${(1 - prog(t, 10.5 + i * 0.5, 0.5)) * 14}px)` }}>
+        <div key={txt} style={{ position: "absolute", left: 60 + i * 335, top: 1696, fontFamily: MONO, fontWeight: 700, fontSize: 25, letterSpacing: 1, color: C.white, opacity: prog(t, 10.5 + i * 0.5, 0.4), transform: `translateY(${(1 - prog(t, 10.5 + i * 0.5, 0.5)) * 14}px)` }}>
           <span style={{ color: C.lime }}>0{i + 1}</span>&nbsp;&nbsp;{txt}
         </div>
       ))}
-      <Tag x={60} y={1830} size={18} opacity={0.5 * prog(t, 9.7, 0.5)} spacing={2}>Fictional brand shown for illustration only.</Tag>
+      <Tag x={60} y={1776} size={25} opacity={0.75 * prog(t, 9.7, 0.5)} spacing={1}>Fictional brand shown for illustration only.</Tag>
       <Flash t={t} at={T.burst} peak={0.35} color={C.lime} decay={10} />
     </AbsoluteFill>
   );

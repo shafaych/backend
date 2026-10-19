@@ -77,8 +77,8 @@ export const Scene1: React.FC = () => {
 
       <AbsoluteFill style={{ transform: `translate(${cam.x}px,${cam.y}px) rotate(${cam.r}rad) scale(${inC ? 1 + press * 0.3 : 1})` }}>
         {/* section tag */}
-        <Tag x={60} y={90} color={C.lime} size={22} opacity={prog(t, 0.1, 0.3) * (inD ? 0.8 : 1)}>[ 01 ] Minimum order quantity</Tag>
-        <Tag x={1020} y={90} align="right" color={C.white} size={22} opacity={0.5 * prog(t, 0.1, 0.3)}>Sportswear · Start-up</Tag>
+        <Tag x={60} y={90} color={C.lime} opacity={prog(t, 0.1, 0.3) * (inD ? 0.8 : 1)}>[ 01 ] Minimum order quantity</Tag>
+        <Tag x={1020} y={90} align="right" color={C.white} opacity={0.6 * prog(t, 0.1, 0.3)}>Sportswear · Start-up</Tag>
 
         {/* ---- 500? / 1,000? */}
         {inA && t >= T.n500 && (
