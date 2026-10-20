@@ -1,0 +1,8 @@
+node_modules
+tools/*.onnx
+tools/*.bin
+out/frames
+out/*.mp4
+out/*.png
+audio/master_raw.wav
+audio/*.npy
