@@ -32,14 +32,15 @@ function drawThread(ctx: CanvasRenderingContext2D, f: number, a: number) {
   ctx.scale(Z, Z);
   ctx.translate(-W / 2, -960);
   const plies = 3;
-  const steps = 110;
+  const steps = 220;
   const amp = 15, wl = 60;
   for (let layer = 0; layer < 2; layer++) {
     for (let j = 0; j < plies; j++) {
       const ph = (j / plies) * Math.PI * 2;
       // draw in segments for depth shading (front/back)
       for (let s = 0; s < steps; s++) {
-        const x0 = -120 + (s / steps) * (W + 240), x1 = -120 + ((s + 1) / steps) * (W + 240);
+        const span = W / Math.min(1, Z) + 240, xs = W / 2 - span / 2;
+        const x0 = xs + (s / steps) * span, x1 = xs + ((s + 1) / steps) * span;
         const k0 = (x0 / wl) * Math.PI * 2 + ph - t * 3, k1 = (x1 / wl) * Math.PI * 2 + ph - t * 3;
         const depth = Math.cos((k0 + k1) / 2);
         if ((layer === 0) === depth > 0) continue;
