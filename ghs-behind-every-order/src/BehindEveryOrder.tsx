@@ -19,6 +19,6 @@ export const BehindEveryOrder: React.FC = () => (
     <Scene from={d} to={e}><S4Process /></Scene>
     <Scene from={e} to={f}><S5Quality /></Scene>
     <Scene from={f} to={g} bg={C.porcelain} scan={false}><S6Close /></Scene>
-    <Audio src={staticFile('audio/mix.wav')} />
+    <Audio src={staticFile('audio/final.wav')} />
   </AbsoluteFill>
 );

@@ -47,7 +47,7 @@ export const S4Process: React.FC = () => {
             </div>
             <div style={{marginLeft: 36}}>
               <div style={{fontFamily: SANS, fontWeight: 900, fontSize: 54, color: C.white, letterSpacing: -1, lineHeight: 1}}>{name}</div>
-              <div style={{fontFamily: SANS, fontWeight: 500, fontSize: 31, color: C.mute, marginTop: 10}}>{desc}</div>
+              <div style={{fontFamily: SANS, fontWeight: 500, fontSize: 32, color: C.porcelain, marginTop: 10}}>{desc}</div>
             </div>
             {i < 4 ? <div style={{position: 'absolute', right: 34, fontFamily: MONO, fontSize: 36, color: C.lime, opacity: a}}>→</div> : null}
           </div>
@@ -64,13 +64,13 @@ export const S4Process: React.FC = () => {
       }}>
         <div style={{height: 64, background: C.graphite, display: 'flex', alignItems: 'center', padding: '0 26px', gap: 14}}>
           <div style={{width: 14, height: 14, borderRadius: 7, background: C.lime}} />
-          <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 24, color: C.porcelain, letterSpacing: 1}}>PRODUCTION UPDATE. CONCEPT ONLY</div>
+          <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 27, color: C.porcelain, letterSpacing: 0}}>PRODUCTION UPDATE. CONCEPT ONLY</div>
         </div>
         <div style={{padding: '26px 30px'}}>
           <div style={{background: C.porcelain, color: C.carbon, borderRadius: '16px 16px 16px 4px', padding: '22px 26px', fontFamily: SANS, fontWeight: 600, fontSize: 36, lineHeight: 1.25, minHeight: 112}}>
             {MESSAGE.slice(0, typed)}<span style={{opacity: typed < MESSAGE.length ? 1 : 0, color: C.lime}}>▌</span>
           </div>
-          <div style={{fontFamily: MONO, fontSize: 24, color: C.mute, marginTop: 24, lineHeight: 1.4, opacity: prog(t, s.panel + 2.0, 0.6)}}>
+          <div style={{fontFamily: MONO, fontSize: 28, color: C.porcelain, marginTop: 24, lineHeight: 1.4, opacity: prog(t, s.panel + 2.0, 0.6)}}>
             Format and frequency of updates to be<br />agreed with your GHS contact.
           </div>
         </div>

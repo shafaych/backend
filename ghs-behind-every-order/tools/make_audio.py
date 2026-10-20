@@ -117,7 +117,8 @@ chords = {  # root midi (bass), triad tones
 nbars = int(np.ceil(DUR / bar))
 prog = []
 for b in range(nbars):
-    if b >= nbars - 2: prog.append('G' if b == nbars - 2 else 'Cadd9')
+    if b >= 18: prog.append('Cadd9')
+    elif b == 17: prog.append('G')
     else: prog.append(('Am','F','C','G')[b % 4])
 music = np.zeros((2, N))
 def saw(f, d):
@@ -130,7 +131,7 @@ def pad(notes, d):
     x = lp(x, 1500, 2) / (len(notes)*3) 
     return x * 0.9
 def inten(t):  # overall arc 0..1
-    return float(np.interp(t, [0, 7, 15, 23, 32, 41, 47.5, 50], [0.25, 0.45, 0.6, 0.75, 0.9, 1.0, 1.0, 0.8]))
+    return float(np.interp(t, [0, 7, 15, 23, 32, 41, 45.0, 50], [0.25, 0.45, 0.6, 0.75, 0.9, 1.0, 1.0, 0.8]))
 for b, c in enumerate(prog):
     t0 = b * bar; root, tones = chords[c]
     d = bar + 1.2
@@ -140,7 +141,7 @@ for b, c in enumerate(prog):
     tb = tt(bar + .5); bs = np.sin(2*np.pi*midi(root)*tb) + .3*np.sin(2*np.pi*midi(root)*2*tb)
     add(music, bs * env(bar+.5, .05, .4) * .55, t0, g=inten(t0) * (0.8 if t0 < 7 else 1.0))
     # arpeggio plucks from scene 4 onward
-    if 23 <= t0 < 47.5:
+    if 23 <= t0 < 45.0:
         for k in range(8):
             n = tones[(0,2,1,3,2,1,3,2)[k] % len(tones)] + 12
             ts = t0 + k * beat / 2; tp = tt(.5)
@@ -156,15 +157,15 @@ for b in range(nbars):
     t0 = b * bar
     for k in range(4):
         ts = t0 + k * beat
-        if ts >= 7 and ts < 47.5 and k in (0, 2): add(music, kick(), ts, g=.35 * (0.6 if ts < 15 else 1.0))
-        if ts >= 15 and ts < 47.5:
+        if ts >= 7 and ts < 45.0 and k in (0, 2): add(music, kick(), ts, g=.35 * (0.6 if ts < 15 else 1.0))
+        if ts >= 15 and ts < 45.0:
             add(music, shaker(), ts + beat/2, pan=.25, g=1.0 * inten(ts))
-        if ts >= 23 and ts < 47.5 and k in (1, 3): add(music, brush(), ts, g=1.0)
-        if ts >= 32 and ts < 47.5: add(music, hat(), ts, pan=-.2, g=.8)
+        if ts >= 23 and ts < 45.0 and k in (1, 3): add(music, brush(), ts, g=1.0)
+        if ts >= 32 and ts < 45.0: add(music, hat(), ts, pan=-.2, g=.8)
 # intro: sparse soft pulse
 for k in range(int(7 / (2*beat))): add(music, lp(np.sin(2*np.pi*55*tt(.5)), 120) * np.exp(-tt(.5)*6) * .8, k * 2 * beat, g=.5)
 # riser into resolve + resolve chord with long tail
-add(music, swell(2.4, 300, 5000), 45.1, g=1.0)
+add(music, swell(2.4, 300, 5000), cues['s6']['resolve'] - 2.4, g=1.0)
 res_t = cues["s6"]["resolve"]
 for n in [48, 55, 60, 64, 67, 72, 74]:
     d = 2.6; tp = tt(d)
@@ -178,16 +179,23 @@ vo = np.zeros((2, N)); voenv = np.zeros(N)
 for key, t in cues["vo"].items():
     s, sr = sf.read(f"public/audio/vo_{key}.wav"); s = resample_poly(s, SR, sr)
     s = hp(s, 70, 2) * 1.0
+    fi = int(0.015*SR); s[:fi] *= np.linspace(0,1,fi); s[-fi*2:] *= np.linspace(1,0,fi*2)
     add(vo, s, t, g=1.0)
     i = int(t * SR); voenv[i:i+len(s)] = np.maximum(voenv[i:i+len(s)], np.abs(s))
 # duck: smooth envelope
 e = lfilter([1 - np.exp(-1/(0.12*SR))], [1, -np.exp(-1/(0.12*SR))], (voenv > 0.02).astype(float))
 e = lfilter([1 - np.exp(-1/(0.35*SR))], [1, -np.exp(-1/(0.35*SR))], e)
-duck = 1 - 0.55 * np.clip(e * 1.6, 0, 1)
+e = np.roll(e, -int(0.2 * SR))  # look-ahead so the bed is already down when a phrase starts
+duck = 1 - 0.7 * np.clip(e * 1.6, 0, 1)
 
-mix = vo * 1.0 + music * 0.55 * duck + sfx * 0.55 * (1 - 0.25 * np.clip(e*1.6, 0, 1))
-mix = np.tanh(mix * 0.9) / np.tanh(0.9)
-pk = np.abs(mix).max(); mix = mix / pk * 0.89
-sf.write("public/audio/mix.wav", mix.T.astype(np.float32), SR, subtype="PCM_16")
+BED = 0.06  # music/SFX sit well under the narration
+sfx_duck = 1 - 0.75 * np.clip(e * 1.6, 0, 1)
+SFX_G = 0.05
+mix = vo * 1.0 + music * BED * duck + sfx * SFX_G * sfx_duck
+pk = np.abs(mix).max(); mix = mix / pk * 0.5   # headroom only; final loudness set by tools/finalize_audio.sh
+bed = (music * BED * duck + sfx * SFX_G * sfx_duck) / pk * 0.5
+sf.write('public/audio/stem_vo.wav', (vo / pk * 0.5).T.astype(np.float32), SR, subtype='FLOAT')
+sf.write('public/audio/stem_bed.wav', bed.T.astype(np.float32), SR, subtype='FLOAT')
+sf.write("public/audio/mix.wav", mix.T.astype(np.float32), SR, subtype="FLOAT")
 sf.write("public/audio/music_only.wav", (music * .5).T.astype(np.float32), SR, subtype="PCM_16")
 print("done, peak before norm", round(float(pk), 2))

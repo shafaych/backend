@@ -11,13 +11,17 @@ SEGMENTS = {
   "s3":  "Your designs, materials, sizing, and branding requirements should be clear before production begins.",
   "s4":  "Understand each production stage, confirm your order details, and discuss how progress updates will be shared.",
   "s5":  "From construction details to final inspection, quality deserves attention at every stage.",
-  "s6a": "Have questions? Talk directly with GHS Custom Gear about your custom manufacturing requirements.",
+  "s6a": "Have questions? Talk directly with GHS Custom Gear.",
   "s6b": "Let's build with clarity.",
 }
+# pronunciation fixes applied on the phoneme string (Sialkot = see-AHL-kot; Pakistan = PAH-kih-stahn)
+PRON = {"sˈaɪəlkˌɑːt": "siˈɑːlkˌɑːt", "pˌækɪstˈæn": "pˌɑːkɪstˈɑːn"}
 k = Kokoro("models/kokoro-v1.0.onnx", "models/voices-v1.0.bin")
 meta = {}
 for key, text in SEGMENTS.items():
-    s, sr = k.create(text, voice=VOICE, speed=(SPEED*1.07 if key.startswith("s6") else SPEED), lang="en-us")
+    ph = k.tokenizer.phonemize(text, "en-us")
+    for a, b in PRON.items(): ph = ph.replace(a, b)
+    s, sr = k.create(ph, voice=VOICE, speed=SPEED, lang="en-us", is_phonemes=True)
     s = np.asarray(s, dtype=np.float32)
     # trim silence edges
     idx = np.where(np.abs(s) > 0.01)[0]

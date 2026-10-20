@@ -76,7 +76,7 @@ export const S5Quality: React.FC = () => {
           <g>
             <line x1={150} x2={930} y1={scanY} y2={scanY} stroke={C.lime} strokeWidth={3} />
             <rect x={150} y={scanY - 60} width={780} height={60} fill={C.lime} opacity={0.08} />
-            <text x={940} y={scanY - 10} textAnchor="end" fontFamily={MONO} fontSize={24} fill={C.lime} fontWeight={700}>MEASURING</text>
+            <text x={940} y={scanY - 10} textAnchor="end" fontFamily={MONO} fontSize={28} fill={C.lime} fontWeight={700}>MEASURING</text>
           </g>
         ) : null}
         {/* lens */}
@@ -116,7 +116,7 @@ export const S5Quality: React.FC = () => {
                 <path d="M11 21 L18 28 L30 13" fill="none" stroke={C.carbon} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={40} strokeDashoffset={40 * (1 - p)} />
               </svg>
               <div style={{fontFamily: SANS, fontWeight: 800, fontSize: 36, color: active ? C.lime : C.white, marginLeft: 20, width: 400, letterSpacing: -0.5}}>{name}</div>
-              <div style={{fontFamily: SANS, fontWeight: 500, fontSize: 28, color: C.mute}}>{desc}</div>
+              <div style={{fontFamily: SANS, fontWeight: 500, fontSize: 30, color: C.porcelain}}>{desc}</div>
             </div>
           );
         })}

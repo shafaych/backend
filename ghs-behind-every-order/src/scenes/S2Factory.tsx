@@ -132,7 +132,7 @@ export const S2Factory: React.FC = () => {
         <div style={{position: 'absolute', left: 80, right: 80, top: 1450, opacity: capP * titleOut}}>
           <div style={{fontFamily: MONO, fontSize: 34, color: C.lime, letterSpacing: 4}}>{`0${curZone + 1} / 05`}</div>
           <div style={{fontFamily: SANS, fontWeight: 900, fontSize: 88, color: C.white, letterSpacing: -2, marginTop: 8}}>{ZONES[curZone].name}</div>
-          <div style={{fontFamily: SANS, fontWeight: 500, fontSize: 40, color: C.mute, marginTop: 6}}>{ZONES[curZone].note}</div>
+          <div style={{fontFamily: SANS, fontWeight: 500, fontSize: 40, color: C.porcelain, marginTop: 6}}>{ZONES[curZone].note}</div>
         </div>
       ) : null}
 
@@ -147,7 +147,7 @@ export const S2Factory: React.FC = () => {
           return <div key={i} style={{opacity: p, transform: `translateY(${(1 - p) * 24}px)`}}>{r.el}</div>;
         })}
         <div style={{height: 4, width: 920 * prog(t, s2.t3, 1.0), background: C.lime, marginTop: 30}} />
-        <div style={{fontFamily: MONO, fontSize: 27, color: C.mute, marginTop: 24, lineHeight: 1.45, opacity: prog(t, s2.t3 + 0.4, 0.6)}}>
+        <div style={{fontFamily: MONO, fontSize: 31, color: C.porcelain, marginTop: 24, lineHeight: 1.4, opacity: prog(t, s2.t3 + 0.4, 0.6)}}>
           ILLUSTRATIVE SCHEMATIC. NOT ACTUAL FOOTAGE<br />OR INDEPENDENTLY VERIFIED FACILITY EVIDENCE.
         </div>
       </div>

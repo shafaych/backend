@@ -32,9 +32,9 @@ export const S3Spec: React.FC = () => {
       }}>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `3px solid ${C.carbon}`, paddingBottom: 14}}>
           <div style={{fontFamily: SANS, fontWeight: 900, fontSize: 44, color: C.carbon, letterSpacing: -1}}>ORDER SPECIFICATION</div>
-          <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 22, color: C.graphite, letterSpacing: 1}}>TEMPLATE</div>
+          <div style={{fontFamily: MONO, fontWeight: 700, fontSize: 26, color: C.graphite, letterSpacing: 1}}>TEMPLATE</div>
         </div>
-        <div style={{fontFamily: MONO, fontSize: 22, color: C.graphite, margin: '10px 0 8px', letterSpacing: 1}}>ILLUSTRATIVE FORMAT. NOT A REAL ORDER.</div>
+        <div style={{fontFamily: MONO, fontSize: 27, color: C.graphite, margin: '10px 0 8px', letterSpacing: 1}}>ILLUSTRATIVE FORMAT. NOT A REAL ORDER.</div>
         {ROWS.map((r, i) => {
           const p = prog(t, s.rows[i], 0.5);
           const chk = prog(t, s.rows[i] + 0.2, 0.35);
@@ -71,13 +71,13 @@ export const S3Spec: React.FC = () => {
         </g>
         {/* legend */}
         <g opacity={aP(0)}>
-          <text x={690} y={900} fontFamily={MONO} fontSize={24} fill={C.mute} letterSpacing={2}>MEASUREMENT POINTS</text>
-          <text x={690} y={930} fontFamily={MONO} fontSize={24} fill={C.mute} letterSpacing={2}>(ILLUSTRATIVE)</text>
+          <text x={690} y={900} fontFamily={MONO} fontSize={27} fill={C.porcelain} letterSpacing={0}>MEASUREMENT POINTS</text>
+          <text x={690} y={930} fontFamily={MONO} fontSize={27} fill={C.porcelain} letterSpacing={0}>(ILLUSTRATIVE)</text>
           {LEGEND.map((l, i) => (
             <g key={l} opacity={aP(i)}>
               <circle cx={706} cy={990 + i * 62} r={19} fill="none" stroke={C.lime} strokeWidth={2.5} />
-              <text x={706} y={999 + i * 62} textAnchor="middle" fontFamily={MONO} fontWeight={700} fontSize={24} fill={C.lime}>{l[0]}</text>
-              <text x={742} y={999 + i * 62} fontFamily={MONO} fontWeight={700} fontSize={25} fill={C.porcelain}>{l.slice(3)}</text>
+              <text x={706} y={999 + i * 62} textAnchor="middle" fontFamily={MONO} fontWeight={700} fontSize={26} fill={C.lime}>{l[0]}</text>
+              <text x={742} y={999 + i * 62} fontFamily={MONO} fontWeight={700} fontSize={28} fill={C.porcelain}>{l.slice(3)}</text>
             </g>
           ))}
         </g>
