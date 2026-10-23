@@ -28,10 +28,10 @@ src = [f"sine=f={f}:d={tot}:r=48000,volume={a}" for f, a in zip(notes, amps)]
 ins = []
 for s_ in src: ins += ['-f', 'lavfi', '-i', s_]
 fl = ''.join(f'[{i}:a]' for i in range(len(notes))) + f"amix=inputs={len(notes)}:normalize=0,tremolo=f=0.11:d=0.35,lowpass=f=1400,aecho=0.8:0.6:420|760:0.35|0.22,stereotools=mlev=0.9:slev=1.4,afade=t=in:d=2.5,afade=t=out:st={tot-3}:d=3,loudnorm=I=-26:TP=-6:LRA=7[m]"
-subprocess.run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', fl, '-map', '[m]', '-ac', '2', f'{R}/audio_stems/bed_music_pad.wav'], check=True)
+subprocess.run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', fl, '-map', '[m]', '-t', f'{tot}', '-ac', '2', f'{R}/audio_stems/bed_music_pad.wav'], check=True)
 
 # Bed mix (no English voice). Music held back under the Urdu intro.
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', f'{R}/audio_stems/bed_intro_urdu.wav', '-i', f'{R}/audio_stems/bed_ambience.wav', '-i', f'{R}/audio_stems/bed_music_pad.wav',
                 '-filter_complex', f"[0:a]volume=1.0[u];[1:a]volume=1.0[a];[2:a]volume='if(lt(t,5.5),0.45,1)':eval=frame[m];[u][a][m]amix=inputs=3:normalize=0,alimiter=limit=0.89[o]",
-                '-map', '[o]', '-ar', '48000', '-ac', '2', f'{R}/audio_stems/bed_mix_no_voice.wav'], check=True)
+                '-map', '[o]', '-t', f"{T['total']}", '-ar', '48000', '-ac', '2', f'{R}/audio_stems/bed_mix_no_voice.wav'], check=True)
 print('ok')
