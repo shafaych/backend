@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Img, staticFile, useCurrentFrame} from 'remotion';
 import {C, LightSweep, clamp, ease, easeIO, lerp, tex} from './common';
 
 export type Design = 'voltage' | 'grid' | 'contour' | 'split';
@@ -213,7 +213,7 @@ export const JerseyShot: React.FC<{
     <AbsoluteFill style={{overflow: 'hidden'}}>
       <Studio />
       <AbsoluteFill style={{transform: `translate(${540 + sx}px, 960px) scale(${zz}) translate(${-cx}px, ${-cy}px)`, transformOrigin: '0 0', width: 1080, height: 1920}}>
-        <JerseySVG d={d} cell={cell} seed={seed} />
+        <Img src={staticFile(`jerseys/${d}.png`)} style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920}} />
       </AbsoluteFill>
       <LightSweep p={lerp(f, 0, 1, 0, len)} angle={-24} strength={sweep} />
     </AbsoluteFill>

@@ -27,7 +27,7 @@ const IMAGES = [
   'knit_carbon.jpg', 'knit_graphite.jpg', 'knit_porcelain.jpg', 'knit_lime.jpg', 'rib_carbon.jpg', 'rib_lime.jpg',
   'mesh_carbon.jpg', 'mesh_porcelain.jpg', 'satin_lime.jpg', 'satin_porcelain.jpg', 'knit_tile_overlay.png',
   'knit_tile_fine.png', 'grain.png',
-].map(tex);
+].map(tex).concat(['voltage', 'grid', 'contour', 'split'].map((d) => staticFile(`jerseys/${d}.png`)));
 const FONTS: [string, string, string][] = [
   ['Inter', '300', 'inter-latin-300-normal.woff2'], ['Inter', '500', 'inter-latin-500-normal.woff2'],
   ['Inter', '600', 'inter-latin-600-normal.woff2'], ['Inter', '700', 'inter-latin-700-normal.woff2'],
