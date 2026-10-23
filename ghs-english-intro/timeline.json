@@ -1,58 +1,58 @@
 {
- "total": 56.940740740740736,
+ "total": 55.3,
  "intro": 5.5,
  "narrationStart": 5.9,
- "narrationEnd": 49.440740740740736,
- "endCardStart": 49.440740740740736,
+ "narrationEnd": 52.3,
+ "endCardStart": 52.3,
  "segments": [
   {
    "id": 1,
    "text": "If you're looking for a reliable manufacturer for your sportswear brand or team, let me show you what we do.",
    "start": 5.9,
-   "speechEnd": 13.307407407407407,
-   "end": 13.707407407407407
+   "speechEnd": 13.9,
+   "end": 14.3
   },
   {
    "id": 2,
-   "text": "We're GHS Custom Gear, a custom sportswear manufacturing company based in Sialkot, Pakistan.",
-   "start": 13.707407407407407,
-   "speechEnd": 18.522222222222222,
-   "end": 18.92222222222222
+   "text": "We're GHS Custom Gear, a custom sportswear manufacturer based in Sialkot, Pakistan.",
+   "start": 14.3,
+   "speechEnd": 19.1,
+   "end": 19.5
   },
   {
    "id": 3,
-   "text": "We operate our own manufacturing facility, producing custom soccer uniforms, basketball jerseys, American football uniforms, tracksuits, hoodies, and training wear.",
-   "start": 18.92222222222222,
-   "speechEnd": 26.32962962962963,
-   "end": 26.729629629629628
+   "text": "We run our own manufacturing facility, producing custom soccer uniforms, basketball jerseys, American football uniforms, tracksuits, hoodies, and training wear.",
+   "start": 19.5,
+   "speechEnd": 27.5,
+   "end": 27.9
   },
   {
    "id": 4,
    "text": "From fabric selection and cutting to stitching, sublimation printing, and embroidery, our experienced production team handles the manufacturing process.",
-   "start": 26.729629629629628,
-   "speechEnd": 33.766666666666666,
-   "end": 34.166666666666664
+   "start": 27.9,
+   "speechEnd": 35.5,
+   "end": 35.9
   },
   {
    "id": 5,
    "text": "Our priority goes beyond making products. We focus on quality, accurate customization, and dependable manufacturing.",
-   "start": 34.166666666666664,
-   "speechEnd": 39.72222222222222,
-   "end": 40.12222222222222
+   "start": 35.9,
+   "speechEnd": 41.9,
+   "end": 42.3
   },
   {
    "id": 6,
    "text": "We also offer custom designs, private labeling, and bulk production.",
-   "start": 40.12222222222222,
-   "speechEnd": 43.82592592592592,
-   "end": 44.22592592592592
+   "start": 42.3,
+   "speechEnd": 46.3,
+   "end": 46.699999999999996
   },
   {
    "id": 7,
    "text": "And here's something important: our minimum order quantity starts at just ten pieces.",
-   "start": 44.22592592592592,
-   "speechEnd": 49.04074074074074,
-   "end": 49.440740740740736
+   "start": 46.699999999999996,
+   "speechEnd": 51.9,
+   "end": 52.3
   }
  ],
  "shots": [
@@ -60,61 +60,71 @@
    "clip": "packing_team",
    "from": 0,
    "start": 5.5,
-   "end": 13.707407407407407
+   "end": 14.3,
+   "tag": null
   },
   {
    "clip": "finished_stacks",
    "from": 0,
-   "start": 13.707407407407407,
-   "end": 18.92222222222222
+   "start": 14.3,
+   "end": 19.5,
+   "tag": "GHS CUSTOM GEAR"
   },
   {
    "clip": "packing_team",
    "from": 9,
-   "start": 18.92222222222222,
-   "end": 22.825925925925922
+   "start": 19.5,
+   "end": 23.7,
+   "tag": "IN-HOUSE MANUFACTURING"
   },
   {
    "clip": "finished_stacks",
    "from": 6.2,
-   "start": 22.825925925925922,
-   "end": 26.729629629629628
+   "start": 23.7,
+   "end": 27.9,
+   "tag": "CUSTOM TEAM UNIFORMS"
   },
   {
    "clip": "stitching",
    "from": 0,
-   "start": 26.729629629629628,
-   "end": 30.448148148148146
+   "start": 27.9,
+   "end": 31.9,
+   "tag": "IN-HOUSE STITCHING"
   },
   {
    "clip": "finishing",
    "from": 0,
-   "start": 30.448148148148146,
-   "end": 34.166666666666664
+   "start": 31.9,
+   "end": 35.9,
+   "tag": "SUBLIMATION & EMBROIDERY"
   },
   {
    "clip": "finishing",
    "from": 4,
-   "start": 34.166666666666664,
-   "end": 37.144444444444446
+   "start": 35.9,
+   "end": 39.099999999999994,
+   "tag": null
   },
   {
    "clip": "stitching",
    "from": 12,
-   "start": 37.144444444444446,
-   "end": 40.12222222222222
+   "start": 39.099999999999994,
+   "end": 42.3,
+   "tag": null
   },
   {
    "clip": "finished_stacks",
    "from": 10.6,
-   "start": 40.12222222222222,
-   "end": 44.22592592592592
+   "start": 42.3,
+   "end": 46.699999999999996,
+   "tag": "PRIVATE LABEL PRODUCTION"
   },
   {
    "clip": "packing_team",
    "from": 14,
-   "start": 44.22592592592592,
-   "end": 49.440740740740736
+   "start": 46.699999999999996,
+   "end": 52.3,
+   "tag": "LOW MOQ — 10 PIECES"
   }
  ]
 }

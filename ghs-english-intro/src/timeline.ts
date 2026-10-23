@@ -6,17 +6,17 @@ export const H = 1920;
 
 export const INTRO_SECONDS = 5.5; // original talking head, original Urdu audio
 export const NARRATION_START = 5.9;
-export const WORDS_PER_SECOND = 2.7;
+export const WORDS_PER_SECOND = 2.5;
 export const PAUSE = 0.4;
-export const END_CARD_SECONDS = 7.5;
+export const END_CARD_SECONDS = 3.0;
 
 export type Line = {id: number; text: string};
 
 // Approved English marketing script (supplied by the owner). NOT a verified transcript of the Urdu recording.
 export const LINES: Line[] = [
   {id: 1, text: "If you're looking for a reliable manufacturer for your sportswear brand or team, let me show you what we do."},
-  {id: 2, text: "We're GHS Custom Gear, a custom sportswear manufacturing company based in Sialkot, Pakistan."},
-  {id: 3, text: 'We operate our own manufacturing facility, producing custom soccer uniforms, basketball jerseys, American football uniforms, tracksuits, hoodies, and training wear.'},
+  {id: 2, text: "We're GHS Custom Gear, a custom sportswear manufacturer based in Sialkot, Pakistan."},
+  {id: 3, text: 'We run our own manufacturing facility, producing custom soccer uniforms, basketball jerseys, American football uniforms, tracksuits, hoodies, and training wear.'},
   {id: 4, text: 'From fabric selection and cutting to stitching, sublimation printing, and embroidery, our experienced production team handles the manufacturing process.'},
   {id: 5, text: 'Our priority goes beyond making products. We focus on quality, accurate customization, and dependable manufacturing.'},
   {id: 6, text: 'We also offer custom designs, private labeling, and bulk production.'},

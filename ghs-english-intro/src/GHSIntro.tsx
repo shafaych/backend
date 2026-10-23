@@ -122,18 +122,18 @@ const Intro: React.FC = () => {
 
 const EndCard: React.FC = () => {
   const frame = useCurrentFrame();
-  const a = (d: number) => interpolate(frame, [d, d + 14], [0, 1], {extrapolateRight: 'clamp', extrapolateLeft: 'clamp', easing: Easing.out(Easing.cubic)});
-  const line = interpolate(frame, [4, 30], [0, 1], {extrapolateRight: 'clamp', extrapolateLeft: 'clamp'});
+  const a = (d: number) => interpolate(frame, [d, d + 9], [0, 1], {extrapolateRight: 'clamp', extrapolateLeft: 'clamp', easing: Easing.out(Easing.cubic)});
+  const line = interpolate(frame, [2, 18], [0, 1], {extrapolateRight: 'clamp', extrapolateLeft: 'clamp'});
   return (
     <AbsoluteFill style={{background: C.black, fontFamily: FONT, justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
       <div style={{position: 'absolute', top: 0, left: 0, right: 0, height: 14, background: C.lime}} />
-      <div style={{opacity: a(4), fontWeight: 800, fontSize: 96, letterSpacing: 4, color: C.white}}>GHS CUSTOM GEAR</div>
+      <div style={{opacity: a(2), fontWeight: 800, fontSize: 96, letterSpacing: 4, color: C.white}}>GHS CUSTOM GEAR</div>
       <div style={{height: 8, width: 420 * line, background: C.lime, margin: '30px 0'}} />
-      <div style={{opacity: a(14), fontWeight: 800, fontSize: 52, letterSpacing: 5, color: C.lime}}>YOUR VISION. OUR PRODUCTION.</div>
-      <div style={{opacity: a(26), fontWeight: 500, fontSize: 38, color: C.porcelain, marginTop: 56, padding: '0 80px', lineHeight: 1.3}}>Custom Sportswear & Private Label Manufacturing</div>
-      <div style={{opacity: a(36), fontWeight: 700, fontSize: 44, color: C.white, marginTop: 28, border: `3px solid ${C.lime}`, padding: '12px 30px'}}>MOQ Starting at 10 Pieces</div>
-      <div style={{opacity: a(48), fontWeight: 700, fontSize: 46, color: C.porcelain, marginTop: 64, letterSpacing: 1}}>ghscustomgear.com</div>
-      <div style={{opacity: a(62), marginTop: 70, background: C.lime, color: C.black, fontWeight: 800, fontSize: 42, letterSpacing: 2, padding: '26px 44px'}}>LET'S DISCUSS YOUR NEXT ORDER.</div>
+      <div style={{opacity: a(8), fontWeight: 800, fontSize: 52, letterSpacing: 5, color: C.lime}}>YOUR VISION. OUR PRODUCTION.</div>
+      <div style={{opacity: a(14), fontWeight: 500, fontSize: 38, color: C.porcelain, marginTop: 56, padding: '0 80px', lineHeight: 1.3}}>Custom Sportswear & Private Label Manufacturing</div>
+      <div style={{opacity: a(20), fontWeight: 700, fontSize: 44, color: C.white, marginTop: 28, border: `3px solid ${C.lime}`, padding: '12px 30px'}}>MOQ Starting at 10 Pieces</div>
+      <div style={{opacity: a(26), fontWeight: 700, fontSize: 46, color: C.porcelain, marginTop: 64, letterSpacing: 1}}>ghscustomgear.com</div>
+      <div style={{opacity: a(32), marginTop: 70, background: C.lime, color: C.black, fontWeight: 800, fontSize: 42, letterSpacing: 2, padding: '26px 44px'}}>LET'S DISCUSS YOUR NEXT ORDER.</div>
     </AbsoluteFill>
   );
 };
