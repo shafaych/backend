@@ -1,0 +1,164 @@
+[
+ {
+  "id": "c01",
+  "src": "clips/c01.mp4",
+  "frames": 24,
+  "rate": 0.75,
+  "label": "orange fabric close",
+  "luma": 0.311,
+  "gamma": 1.147
+ },
+ {
+  "id": "c02",
+  "src": "clips/c02.mp4",
+  "frames": 23,
+  "rate": 0.75,
+  "label": "workshop table wide",
+  "luma": 0.386,
+  "gamma": 1.064
+ },
+ {
+  "id": "c03",
+  "src": "clips/c03.mp4",
+  "frames": 27,
+  "rate": 0.75,
+  "label": "pink garments",
+  "luma": 0.517,
+  "gamma": 0.96
+ },
+ {
+  "id": "c04",
+  "src": "clips/c04.mp4",
+  "frames": 20,
+  "rate": 0.75,
+  "label": "worker with dark garment",
+  "luma": 0.477,
+  "gamma": 0.988
+ },
+ {
+  "id": "c05",
+  "src": "clips/c05.mp4",
+  "frames": 19,
+  "rate": 0.7,
+  "label": "seamstress",
+  "luma": 0.487,
+  "gamma": 0.98
+ },
+ {
+  "id": "c06",
+  "src": "clips/c06.mp4",
+  "frames": 17,
+  "rate": 0.7,
+  "label": "cutting table wide",
+  "luma": 0.473,
+  "gamma": 0.99
+ },
+ {
+  "id": "c07",
+  "src": "clips/c07.mp4",
+  "frames": 19,
+  "rate": 0.7,
+  "label": "cutting machine",
+  "luma": 0.542,
+  "gamma": 0.944
+ },
+ {
+  "id": "c08",
+  "src": "clips/c08.mp4",
+  "frames": 18,
+  "rate": 0.65,
+  "label": "pattern marking",
+  "luma": 0.545,
+  "gamma": 0.942
+ },
+ {
+  "id": "c09",
+  "src": "clips/c09.mp4",
+  "frames": 24,
+  "rate": 0.75,
+  "label": "ruler measuring",
+  "luma": 0.56,
+  "gamma": 0.934
+ },
+ {
+  "id": "c10",
+  "src": "clips/c10.mp4",
+  "frames": 17,
+  "rate": 0.7,
+  "label": "machine sewing",
+  "luma": 0.544,
+  "gamma": 0.943
+ },
+ {
+  "id": "c11",
+  "src": "clips/c11.mp4",
+  "frames": 17,
+  "rate": 0.7,
+  "label": "folding fabric",
+  "luma": 0.564,
+  "gamma": 0.931
+ },
+ {
+  "id": "c12",
+  "src": "clips/c12.mp4",
+  "frames": 20,
+  "rate": 0.75,
+  "label": "sewing grey fabric",
+  "luma": 0.448,
+  "gamma": 1.009
+ },
+ {
+  "id": "c13",
+  "src": "clips/c13.mp4",
+  "frames": 19,
+  "rate": 0.8,
+  "label": "thread cones",
+  "luma": 0.498,
+  "gamma": 0.973
+ },
+ {
+  "id": "c14",
+  "src": "clips/c14.mp4",
+  "frames": 21,
+  "rate": 0.8,
+  "label": "workshop wide",
+  "luma": 0.491,
+  "gamma": 0.978
+ },
+ {
+  "id": "c15",
+  "src": "clips/c15.mp4",
+  "frames": 32,
+  "rate": 0.75,
+  "label": "green/orange garments",
+  "luma": 0.541,
+  "gamma": 0.945
+ },
+ {
+  "id": "c16",
+  "src": "clips/c16.mp4",
+  "frames": 24,
+  "rate": 0.8,
+  "label": "folding orange jersey",
+  "luma": 0.494,
+  "gamma": 0.976
+ },
+ {
+  "id": "c17",
+  "src": "clips/c17.mp4",
+  "frames": 20,
+  "rate": 0.75,
+  "label": "bagged garments",
+  "luma": 0.462,
+  "gamma": 0.998
+ },
+ {
+  "id": "c18",
+  "src": "clips/c18.mp4",
+  "frames": 30,
+  "rate": 0.9,
+  "label": "container",
+  "luma": 0.474,
+  "gamma": 0.99
+ }
+]
