@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Freeze, OffthreadVideo, Sequence, staticFile, interpolate, Easing, useCurrentFrame} from 'remotion';
-import './fonts';
+import {useFonts} from './fonts';
 import {CLIPS, C, start, WIPE_START, WIPE_END, BRAND_START, FOOTAGE_END, TOTAL, PRE} from './timeline';
 import {T1, T2, T3, TechFrame} from './captions';
 import {BrandCard} from './brand';
@@ -69,6 +69,7 @@ const OpenFade = () => {
 };
 
 export const Main: React.FC = () => {
+  useFonts();
   const last = CLIPS[CLIPS.length - 1];
   return (
     <AbsoluteFill style={{background: C.carbon}}>
